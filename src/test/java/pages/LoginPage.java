@@ -6,12 +6,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage {
-
-    WebDriver driver;
+public class LoginPage extends BasePage{
 
     public LoginPage(WebDriver driver){
-        this.driver = driver;
+        super(driver);
     }
 
 //    public LoginPage(WebDriver driver){
@@ -36,12 +34,19 @@ public class LoginPage {
     By user_name_input = By.id("user-name");
     By password_input = By.id("password");
     By login_button = By.id("login-button");
+    By error_container = By.cssSelector(".error-message-container");
 
-    public void login(String user_name, String password){
-        driver.findElement(user_name_input).sendKeys(user_name);
-        driver.findElement(password_input).sendKeys(password);
-        driver.findElement(login_button).click();
+    public void login(String user_name, String password) {
+        sendText(user_name_input, user_name);
+        sendText(password_input, password);
+        clickOnElement(login_button);
     }
+
+
+    public String error_container_class(){
+        return getAttribute(error_container, "class");
+    }
+
 
 
 }
