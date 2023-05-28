@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -11,19 +12,19 @@ public class BasePage {
 
     WebDriver driver;
 
-    public BasePage(WebDriver driver){
+    public BasePage(WebDriver driver) {
         this.driver = driver;
     }
 
-    public WebElement getElement(By locator){
+    public WebElement getElement(By locator) {
         return driver.findElement(locator);
     }
 
-    public List<WebElement> getElements(By locator){
+    public List<WebElement> getElements(By locator) {
         return driver.findElements(locator);
     }
 
-    public void sendText(By locator, String value){
+    public void sendText(By locator, String value) {
         WebElement element = getElement(locator);
         element.clear();
         element.sendKeys(value);
@@ -34,9 +35,52 @@ public class BasePage {
         element.click();
     }
 
-    public String getAttribute(By locator, String attribute){
+    public String getAttribute(By locator, String attribute) {
         WebElement element = getElement(locator);
         return element.getAttribute(attribute);
+    }
+
+    public String getText(By locator) {
+        return getElement(locator).getText();
+    }
+
+    public ArrayList<String> getListOfText(By locator) {
+        ArrayList<String> text_list = new ArrayList<>();
+        for (WebElement element : getElements(locator)) {
+            text_list.add(element.getText().trim());
+        }
+        return text_list;
+    }
+
+    public void acceptAlert() {
+        driver.switchTo().alert().accept();
+    }
+
+    public void dismissAlert() {
+        driver.switchTo().alert().dismiss();
+    }
+
+    public String getAlertText() {
+        return driver.switchTo().alert().getText().trim();
+    }
+
+    public void sendTextToAlert(String text) {
+        driver.switchTo().alert().sendKeys(text);
+    }
+
+    public void scrollToTop() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+    }
+
+    public void scrollToBottom() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(document.body.scrollHeight, 0)");
+    }
+
+    public void scrollToElement(By locator) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView()", getElement(locator));
     }
 
 }
