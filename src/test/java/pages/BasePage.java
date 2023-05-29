@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,10 @@ public class BasePage {
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
+    }
+
+    public String getCurrentUrl() {
+        return driver.getCurrentUrl();
     }
 
     public WebElement getElement(By locator) {
@@ -66,6 +71,21 @@ public class BasePage {
 
     public void sendTextToAlert(String text) {
         driver.switchTo().alert().sendKeys(text);
+    }
+
+    public void selectByIndex(By select_locator, int index){
+        Select select = new Select(getElement(select_locator));
+        select.selectByIndex(index);
+    }
+
+    public void selectByValue(By select_locator, String value){
+        Select select = new Select(getElement(select_locator));
+        select.selectByValue(value);
+    }
+
+    public void selectByVisibleText(By select_locator, String visible_text){
+        Select select = new Select(getElement(select_locator));
+        select.selectByVisibleText(visible_text);
     }
 
     public void scrollToTop() {
