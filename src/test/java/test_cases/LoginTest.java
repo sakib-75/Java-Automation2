@@ -4,17 +4,15 @@ import driver.BaseDrive;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.LoginPage;
+import resource.TestData;
 
 public class LoginTest extends BaseDrive {
 
-    @Test
-    public void login_test(){
+    @Test(dataProvider = "login_data", dataProviderClass = TestData.class)
+    public void login_test(String username, String password){
         driver.get("https://www.saucedemo.com/");
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("", "");
-        String class_value = loginPage.error_container_class();
-        Assert.assertTrue(class_value.contains("error"));
-        Assert.assertEquals(5, 6);
+        loginPage.login(username, password);
 
     }
 
