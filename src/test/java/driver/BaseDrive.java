@@ -19,7 +19,7 @@ import static utils.PropertiesDataParser.loadProperties;
 
 public class BaseDrive {
 
-    public WebDriver driver;
+    public static WebDriver driver;
 
     @BeforeSuite
     public void setup(){
