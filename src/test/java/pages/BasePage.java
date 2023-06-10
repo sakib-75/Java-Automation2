@@ -4,8 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,17 +76,17 @@ public class BasePage {
         driver.switchTo().alert().sendKeys(text);
     }
 
-    public void selectByIndex(By select_locator, int index){
+    public void selectByIndex(By select_locator, int index) {
         Select select = new Select(getElement(select_locator));
         select.selectByIndex(index);
     }
 
-    public void selectByValue(By select_locator, String value){
+    public void selectByValue(By select_locator, String value) {
         Select select = new Select(getElement(select_locator));
         select.selectByValue(value);
     }
 
-    public void selectByVisibleText(By select_locator, String visible_text){
+    public void selectByVisibleText(By select_locator, String visible_text) {
         Select select = new Select(getElement(select_locator));
         select.selectByVisibleText(visible_text);
     }
@@ -102,5 +105,36 @@ public class BasePage {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView()", getElement(locator));
     }
+
+    public void waitForVisibilityOfElement(By locator) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    public void waitForVisibilityOfElements(By locator) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+    }
+
+    public void waitForInvisibilityOfElement(By locator) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+    }
+
+    public void waitForInvisibilityOfElements(By locator) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+    }
+
+    public void waitForElementToBeClickable(By locator) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
+    public void waitForTextToBePresentInElement(By locator, String text) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, text));
+    }
+
 
 }
