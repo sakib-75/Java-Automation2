@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="C:/Users/LENOVO/IdeaProjects/Java_Automation_Course">
+        <classes>
+            <class name="test_cases.AssertExample">
+                <methods>
+                    <include name="hardAssertTest"/>
+                    <include name="softAssertTest"/>
+                </methods>
+            </class>
+            <class name="test_cases.GreencartTest">
+                <methods>
+                    <include name="tc1"/>
+                </methods>
+            </class>
+            <class name="test_cases.HomeTest">
+                <methods>
+                    <include name="tc1"/>
+                </methods>
+            </class>
+            <class name="test_cases.LoginTest">
+                <methods>
+                    <include name="login_test"/>
+                </methods>
+            </class>
+            <class name="test_cases.example.AlertWindow">
+                <methods>
+                    <include name="alertWindow"/>
+                </methods>
+            </class>
+            <class name="test_cases.example.KeyboardAction">
+                <methods>
+                    <include name="tc1"/>
+                </methods>
+            </class>
+            <class name="test_cases.example.Navigate">
+                <methods>
+                    <include name="tc1"/>
+                </methods>
+            </class>
+            <class name="test_cases.example.ScrollPage">
+                <methods>
+                    <include name="tc1"/>
+                </methods>
+            </class>
+            <class name="test_cases.example.SelectDropdown">
+                <methods>
+                    <include name="tc1"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
