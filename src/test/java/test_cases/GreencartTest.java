@@ -3,6 +3,7 @@ package test_cases;
 import driver.BaseDrive;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.GreencartCheckoutPage;
 import pages.GreenkartHomePage;
 
 public class GreencartTest extends BaseDrive {
@@ -21,6 +22,20 @@ public class GreencartTest extends BaseDrive {
         for (int i = 0; i < greenkartHomePage.getAddedItemsNameInCart().size(); i++) {
             Assert.assertEquals(product_names[i], greenkartHomePage.getAddedItemsNameInCart().get(i));
         }
+    }
+
+    @Test
+    public void test_invalid_promo_code_alert() {
+        GreenkartHomePage greenkartHomePage = new GreenkartHomePage(driver);
+        GreencartCheckoutPage greencartCheckoutPage = new GreencartCheckoutPage(driver);
+
+        greenkartHomePage.proceedToCheckout();
+        greencartCheckoutPage.applyPromoCode("abc");
+
+        String expected_invalid_promo_alert = "Invalid code ..!";
+        String actual_invalid_promo_alert = greencartCheckoutPage.getPromoAlert();
+        Assert.assertEquals(actual_invalid_promo_alert, expected_invalid_promo_alert);
+
     }
 
 
