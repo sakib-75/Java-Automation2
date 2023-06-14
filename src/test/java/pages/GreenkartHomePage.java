@@ -50,6 +50,15 @@ public class GreenkartHomePage extends BasePage {
         return added_product_name;
     }
 
+    @Step("Proceed to checkout")
+    public void proceedToCheckout(){
+        if (getAttribute(checkOutButton, "class").equals("disable")){
+            System.out.println("Checkout button is disabled");
+        }else {
+            clickOnElement(checkOutButton);
+        }
+    }
+
 
 
 }
