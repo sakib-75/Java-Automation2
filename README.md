@@ -1,5 +1,9 @@
 # Automation with selenium java
 
+#### Driver workflow
+
+BaseDriver `-->` TestHome `-->` HomePage `-->` BasePage
+
 ### Allure report setup steps for local machine
 
 1. Open browser
