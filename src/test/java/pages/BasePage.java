@@ -49,7 +49,7 @@ public class BasePage {
     }
 
     public String getText(By locator) {
-        return getElement(locator).getText();
+        return getElement(locator).getText().trim();
     }
 
     public ArrayList<String> getListOfText(By locator) {
