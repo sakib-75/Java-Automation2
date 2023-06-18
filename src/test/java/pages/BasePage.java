@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -137,18 +138,28 @@ public class BasePage {
     }
 
     public void switchTab(int tabNo) {
-        ArrayList<String> newTab = new ArrayList<>(driver.getWindowHandles());
-        driver.switchTo().window(newTab.get(tabNo));
+        ArrayList<String> allTab = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(allTab.get(tabNo));
     }
 
-    public void switchFrame(By frame_locator){
+    public void switchFrame(By frame_locator) {
         WebElement frame_element = getElement(frame_locator);
         driver.switchTo().frame(frame_element);
+    }
+
+    public void switchToDefaultContent() {
+        driver.switchTo().defaultContent();
     }
 
     public String getCssValue(By locator, String css_property) {
         WebElement element = getElement(locator);
         return element.getCssValue(css_property).trim();
+    }
+
+    public void dragAndDrop(By source_locator, By target_locator) {
+        Actions actions = new Actions(driver);
+        actions.dragAndDrop(getElement(source_locator), getElement(target_locator))
+                .build().perform();
     }
 
 
