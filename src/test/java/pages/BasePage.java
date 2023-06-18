@@ -136,5 +136,20 @@ public class BasePage {
         wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, text));
     }
 
+    public void switchTab(int tabNo) {
+        ArrayList<String> newTab = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(newTab.get(tabNo));
+    }
+
+    public void switchFrame(By frame_locator){
+        WebElement frame_element = getElement(frame_locator);
+        driver.switchTo().frame(frame_element);
+    }
+
+    public String getCssValue(By locator, String css_property) {
+        WebElement element = getElement(locator);
+        return element.getCssValue(css_property).trim();
+    }
+
 
 }
