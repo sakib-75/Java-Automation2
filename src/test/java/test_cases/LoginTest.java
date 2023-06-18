@@ -13,6 +13,7 @@ public class LoginTest extends BaseDrive {
         driver.get("https://www.saucedemo.com/");
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login(username, password);
+        loginPage.login_btn_css();
 
     }
 

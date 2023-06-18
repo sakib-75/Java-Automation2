@@ -9,9 +9,9 @@ import org.openqa.selenium.support.PageFactory;
 
 import static utils.TakeScreenshot.screenshotForAllure;
 
-public class LoginPage extends BasePage{
+public class LoginPage extends BasePage {
 
-    public LoginPage(WebDriver driver){
+    public LoginPage(WebDriver driver) {
         super(driver);
     }
 
@@ -48,10 +48,15 @@ public class LoginPage extends BasePage{
     }
 
 
-    public String error_container_class(){
+    public String error_container_class() {
         return getAttribute(error_container, "class");
     }
 
+    public void login_btn_css() {
+        System.out.println(getCssValue(login_button, "background-color"));
+        System.out.println(getCssValue(login_button, "color"));
+        System.out.println(getCssValue(login_button, "font-size"));
+    }
 
 
 }
