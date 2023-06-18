@@ -12,6 +12,7 @@
             <class name="test_cases.GreencartTest">
                 <methods>
                     <include name="tc1"/>
+                    <include name="test_invalid_promo_code_alert"/>
                 </methods>
             </class>
             <class name="test_cases.HomeTest">
@@ -27,6 +28,11 @@
             <class name="test_cases.example.AlertWindow">
                 <methods>
                     <include name="alertWindow"/>
+                </methods>
+            </class>
+            <class name="test_cases.example.DragAndDrop">
+                <methods>
+                    <include name="tc1"/>
                 </methods>
             </class>
             <class name="test_cases.example.KeyboardAction">
