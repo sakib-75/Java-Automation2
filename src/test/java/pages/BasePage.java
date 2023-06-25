@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -41,6 +42,10 @@ public class BasePage {
 
     public void clickOnElement(By locator) {
         WebElement element = getElement(locator);
+        element.click();
+    }
+
+    public void clickOnElement(WebElement element) {
         element.click();
     }
 
@@ -107,8 +112,9 @@ public class BasePage {
         js.executeScript("arguments[0].scrollIntoView()", getElement(locator));
     }
 
-    public void waitForVisibilityOfElement(By locator) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+    public void waitForVisibilityOfElement(By locator, int... maxWait) {
+        int waitTime = (maxWait.length > 0) ? maxWait[0] : 30;
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(waitTime));
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
@@ -135,6 +141,15 @@ public class BasePage {
     public void waitForTextToBePresentInElement(By locator, String text) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, text));
+    }
+
+    public boolean isElementVisible(By locator) {
+        try {
+            waitForVisibilityOfElement(locator, 5);
+        } catch (TimeoutException e) {
+            return false;
+        }
+        return true;
     }
 
     public void switchTab(int tabNo) {
