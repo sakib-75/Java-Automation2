@@ -11,8 +11,8 @@ import java.io.ByteArrayInputStream;
 public class TakeScreenshot extends BaseDrive {
 
     @Step("Taking a screenshot for {0}")
-    public static void screenshotForAllure(String name) {
-        Allure.addAttachment(name, new ByteArrayInputStream(((TakesScreenshot) driver)
+    public static void screenshotForAllure(String screenshot_name) {
+        Allure.addAttachment(screenshot_name, new ByteArrayInputStream(((TakesScreenshot) driver)
                 .getScreenshotAs(OutputType.BYTES)));
     }
 
