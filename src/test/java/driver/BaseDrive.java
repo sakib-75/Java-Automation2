@@ -3,6 +3,8 @@ package driver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
@@ -13,13 +15,15 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.time.Duration;
 
+import static utils.TakeScreenshot.screenshotForAllure;
+
 
 public class BaseDrive {
 
     public static AndroidDriver driver = null;
 
     @BeforeSuite
-    public static void setup() throws MalformedURLException, URISyntaxException {
+    public static void driverSetup() throws MalformedURLException, URISyntaxException {
         DesiredCapabilities capability = new DesiredCapabilities();
         capability.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
         //capability.setCapability(MobileCapabilityType.UDID, "emulator-5554");
@@ -37,8 +41,15 @@ public class BaseDrive {
 
     }
 
+    @AfterMethod
+    public void checkFailure(ITestResult result) {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            screenshotForAllure(result.getName());
+        }
+    }
+
     @AfterSuite
-    public static void teardown() {
+    public static void driverTeardown() {
         if (driver != null) {
             driver.quit();
         }
