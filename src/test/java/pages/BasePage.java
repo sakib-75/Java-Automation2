@@ -2,6 +2,7 @@ package pages;
 
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -41,6 +42,10 @@ public class BasePage {
         element.click();
     }
 
+    public void clickOnElement(WebElement element) {
+        element.click();
+    }
+
     public String getAttribute(By locator, String attribute) {
         WebElement element = getElement(locator);
         return element.getAttribute(attribute);
@@ -58,8 +63,9 @@ public class BasePage {
         return text_list;
     }
 
-    public void waitForVisibilityOfElement(By locator) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+    public void waitForVisibilityOfElement(By locator, int... maxWait) {
+        int waitTime = (maxWait.length > 0) ? maxWait[0] : 30;
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(waitTime));
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
@@ -86,6 +92,15 @@ public class BasePage {
     public void waitForTextToBePresentInElement(By locator, String text) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, text));
+    }
+
+    public boolean isElementVisible(By locator) {
+        try {
+            waitForVisibilityOfElement(locator, 5);
+        } catch (TimeoutException e) {
+            return false;
+        }
+        return true;
     }
 
 
