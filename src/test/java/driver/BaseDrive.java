@@ -8,6 +8,8 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
@@ -16,13 +18,14 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import static utils.PropertiesDataParser.loadProperties;
+import static utils.TakeScreenshot.screenshotForAllure;
 
 public class BaseDrive {
 
-    public static WebDriver driver;
+    public static WebDriver driver = null;
 
     @BeforeSuite
-    public void setup(){
+    public void driverSetup() {
         Properties properties = loadProperties("config.properties");
         String browser = properties.getProperty("browser");
         boolean headless_browser = properties.getProperty("headless-browser").equals("true");
@@ -31,12 +34,12 @@ public class BaseDrive {
         headless_options.add("--headless");
         headless_options.add("--window-size=1920, 1080");
 
-        switch (browser){
+        switch (browser) {
             case "chrome":
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.addArguments("--remote-allow-origins=*");
-                if (headless_browser){
+                if (headless_browser) {
                     chromeOptions.addArguments(headless_options);
                 }
                 driver = new ChromeDriver(chromeOptions);
@@ -46,7 +49,7 @@ public class BaseDrive {
                 WebDriverManager.firefoxdriver().setup();
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
                 firefoxOptions.addArguments("--remote-allow-origins=*");
-                if (headless_browser){
+                if (headless_browser) {
                     firefoxOptions.addArguments(headless_options);
                 }
                 driver = new FirefoxDriver(firefoxOptions);
@@ -56,7 +59,7 @@ public class BaseDrive {
                 WebDriverManager.edgedriver().setup();
                 EdgeOptions edgeOptions = new EdgeOptions();
                 edgeOptions.addArguments("--remote-allow-origins=*");
-                if (headless_browser){
+                if (headless_browser) {
                     edgeOptions.addArguments(headless_options);
                 }
                 driver = new EdgeDriver(edgeOptions);
@@ -71,9 +74,18 @@ public class BaseDrive {
 
     }
 
+    @AfterMethod
+    public void checkFailure(ITestResult result) {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            screenshotForAllure(result.getName());
+        }
+    }
+
     @AfterSuite
-    public void quit(){
-        driver.quit();
+    public void driverTeardown() {
+        if (driver != null) {
+            driver.quit();
+        }
     }
 
 }
