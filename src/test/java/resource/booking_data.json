@@ -1,0 +1,24 @@
+{
+  "create_booking_payload": {
+    "firstname": "Alex",
+    "lastname": "Jhon",
+    "totalprice": 115,
+    "depositpaid": true,
+    "bookingdates": {
+      "checkin": "2018-01-01",
+      "checkout": "2019-01-01"
+    },
+    "additionalneeds": "Breakfast"
+  },
+  "update_booking_payload": {
+    "firstname": "Update first name",
+    "lastname": "Update last name",
+    "totalprice": 550,
+    "depositpaid": true,
+    "bookingdates": {
+      "checkin": "2018-01-01",
+      "checkout": "2019-01-01"
+    },
+    "additionalneeds": "Breakfast"
+  }
+}
