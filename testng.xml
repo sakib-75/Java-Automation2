@@ -3,56 +3,16 @@
 <suite name="All Test Suite">
     <test verbose="2" preserve-order="true" name="C:/Users/LENOVO/IdeaProjects/Java_Automation_Course">
         <classes>
-            <class name="test_cases.AssertExample">
+            <class name="test_cases.Booking">
                 <methods>
-                    <include name="hardAssertTest"/>
-                    <include name="softAssertTest"/>
+                    <include name="createBooking"/>
+                    <include name="updateBooking"/>
                 </methods>
             </class>
-            <class name="test_cases.GreencartTest">
+            <class name="test_cases.Students">
                 <methods>
-                    <include name="tc1"/>
-                    <include name="test_invalid_promo_code_alert"/>
-                </methods>
-            </class>
-            <class name="test_cases.HomeTest">
-                <methods>
-                    <include name="tc1"/>
-                </methods>
-            </class>
-            <class name="test_cases.LoginTest">
-                <methods>
-                    <include name="login_test"/>
-                </methods>
-            </class>
-            <class name="test_cases.example.AlertWindow">
-                <methods>
-                    <include name="alertWindow"/>
-                </methods>
-            </class>
-            <class name="test_cases.example.DragAndDrop">
-                <methods>
-                    <include name="tc1"/>
-                </methods>
-            </class>
-            <class name="test_cases.example.KeyboardAction">
-                <methods>
-                    <include name="tc1"/>
-                </methods>
-            </class>
-            <class name="test_cases.example.Navigate">
-                <methods>
-                    <include name="tc1"/>
-                </methods>
-            </class>
-            <class name="test_cases.example.ScrollPage">
-                <methods>
-                    <include name="tc1"/>
-                </methods>
-            </class>
-            <class name="test_cases.example.SelectDropdown">
-                <methods>
-                    <include name="tc1"/>
+                    <include name="testCreateStudent"/>
+                    <include name="testGetAllStudent"/>
                 </methods>
             </class>
         </classes>
